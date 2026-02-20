@@ -1,20 +1,22 @@
 /* ==========================================================================
-   VARIABLES DE COULEURS (Palette "Nuit Étoilée & Projecteurs")
+   CONSTANTES & COULEURS
    ========================================================================== */
 :root {
+    --bg-deep: #050914;       /* Noir quasi total */
     --bg-main: #0B132B;       /* Bleu Espace Profond */
-    --text-main: #F8F9FA;     /* Blanc Nuage */
-    --gold-accent: #F5D061;   /* Or Électrique / Projecteur */
+    --text-main: #F8F9FA;     /* Blanc pur */
+    --text-muted: #a0aec0;    /* Gris pour les textes secondaires */
+    --gold-accent: #F5D061;   /* Or Projecteur */
 
-    /* Couleurs d'accentuation des 4 Piliers */
-    --prod-color: #E63946;    /* Rouge Enregistrement */
-    --rec-color: #8338EC;     /* Violet Acoustique */
-    --edit-color: #2A9D8F;    /* Vert Émeraude */
-    --events-color: #FF006E;  /* Magenta Scène */
+    /* Couleurs Néons des Piliers */
+    --prod-neon: 230, 57, 70;   /* Rouge (format RGB pour effets de transparence) */
+    --rec-neon: 131, 56, 236;   /* Violet */
+    --edit-neon: 42, 157, 143;  /* Vert */
+    --events-neon: 255, 0, 110; /* Magenta */
 }
 
 /* ==========================================================================
-   RÉINITIALISATION & BASE (Zéro trackeur, polices systèmes)
+   BASE IMMERSIVE (Zéro trackeur, fonts système)
    ========================================================================== */
 * {
     box-sizing: border-box;
@@ -23,92 +25,129 @@
 }
 
 body {
-    background-color: var(--bg-main);
+    /* FOND ARTISTIQUE COMPLEXE :
+       Mélange de dégradés radiaux pour simuler des lumières dans l'espace.
+       Le "fixed" crée un effet de profondeur lors du scroll. */
+    background-color: var(--bg-deep);
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(245, 208, 97, 0.15) 0%, transparent 50%), /* Lumière dorée zénithale */
+        radial-gradient(circle at 85% 30%, rgba(131, 56, 236, 0.1) 0%, transparent 50%), /* Touche violette */
+        radial-gradient(circle at 15% 70%, rgba(42, 157, 143, 0.1) 0%, transparent 50%), /* Touche verte */
+        linear-gradient(to bottom, var(--bg-main), var(--bg-deep)); /* Fond global */
+    background-attachment: fixed;
+    background-size: cover;
+
     color: var(--text-main);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
     overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
-    margin-bottom: 1rem;
-    font-weight: 700;
+    font-weight: 800; /* Plus gras pour plus d'impact */
+    letter-spacing: -0.02em;
 }
 
-p {
-    margin-bottom: 1rem;
-    color: #cbd5e1; /* Un gris très clair pour reposer les yeux sur fond sombre */
+p, li {
+    color: var(--text-muted);
+    font-weight: 400;
 }
 
 a {
-    color: var(--gold-accent);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
     color: var(--text-main);
-}
-
-ul {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
-    color: #cbd5e1;
+    text-decoration: none;
+    position: relative;
 }
 
 /* ==========================================================================
-   EN-TÊTE GLOBAL (Header)
+   HEADER SPECTACULAIRE
    ========================================================================== */
 #entete-global {
     text-align: center;
-    padding: 5rem 2rem;
-    background: linear-gradient(180deg, #050914 0%, var(--bg-main) 100%);
-    border-bottom: 1px solid rgba(245, 208, 97, 0.1);
+    padding: 8rem 2rem 5rem; /* Plus d'espace en haut */
+    /* Effet de brume légère en bas du header */
+    background: linear-gradient(to bottom, transparent 0%, rgba(5, 9, 20, 0.8) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* TITRE ANIMÉ "OR LIQUIDE" */
 #entete-global h1 {
-    font-size: 3.5rem;
-    letter-spacing: 3px;
+    font-size: 4.5rem; /* Beaucoup plus gros */
     text-transform: uppercase;
-    color: var(--text-main);
-    margin-bottom: 0.5rem;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+
+    /* Magie CSS : Le dégradé est appliqué SUR le texte */
+    background: linear-gradient(to right, var(--text-main) 20%, var(--gold-accent) 50%, var(--text-main) 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Animation lente de la lumière dans le texte */
+    animation: shineText 8s linear infinite;
+}
+
+@keyframes shineText {
+    to { background-position: 200% center; }
 }
 
 #entete-global p strong {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: var(--gold-accent);
-    font-weight: 400;
-    letter-spacing: 1px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    /* Légère lueur diffuse */
+    text-shadow: 0 0 20px rgba(245, 208, 97, 0.5);
 }
 
+/* NAVIGATION MODERNE */
 #entete-global nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 2.5rem;
-    margin-top: 3rem;
+    gap: 3rem;
+    margin-top: 4rem;
     margin-left: 0;
 }
 
 #entete-global nav a {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid transparent;
+    letter-spacing: 2px;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+}
+
+/* Soulignement animé créatif */
+#entete-global nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold-accent);
+    box-shadow: 0 0 10px var(--gold-accent);
+    transition: width 0.3s ease-in-out;
 }
 
 #entete-global nav a:hover {
-    border-bottom-color: var(--gold-accent);
+    color: var(--gold-accent);
+}
+
+#entete-global nav a:hover::after {
+    width: 100%;
 }
 
 /* ==========================================================================
-   CORPS DE PAGE (Main)
+   MAIN LAYOUT
    ========================================================================== */
 main {
-    max-width: 1200px;
+    max-width: 1300px; /* Un peu plus large */
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 6rem 2rem;
 }
 
 #presentation-globale {
@@ -118,151 +157,197 @@ main {
 }
 
 #presentation-globale h2 {
-    color: var(--gold-accent);
+    color: var(--text-main);
     font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+/* Petit accent doré sous le titre */
+#presentation-globale h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--gold-accent);
+    margin: 1.5rem auto 0;
+    box-shadow: 0 0 15px rgba(245, 208, 97, 0.4);
 }
 
 hr {
     border: 0;
     height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 4rem 0;
+    /* Ligne subtile et lumineuse */
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    margin: 6rem 0;
 }
 
 /* ==========================================================================
-   GRILLE DES 4 PILIERS
+   GRILLE DES PILIERS ARTISTIQUES (Glassmorphism & Néons)
    ========================================================================== */
 #les-piliers {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cartes un peu plus larges */
+    gap: 2.5rem;
+    perspective: 1000px; /* Pour donner un effet 3D subtil au survol */
 }
 
 #les-piliers > h2 {
     grid-column: 1 / -1;
     text-align: center;
-    font-size: 2.5rem;
-    color: var(--gold-accent);
-    margin-bottom: 2rem;
+    font-size: 3rem;
+    color: var(--text-main);
+    margin-bottom: 4rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .pilier-ats {
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 12px;
-    padding: 2.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    /* EFFET GLASSMORPHISM (Verre dépoli) */
+    background: rgba(255, 255, 255, 0.03); /* Très transparent */
+    backdrop-filter: blur(10px); /* Le flou derrière la carte */
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    /* Bordure fine et lumineuse */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transition élastique */
+    overflow: hidden; /* Important pour les effets de lumière qui dépassent */
+}
+
+/* Création d'un halo lumineux caché qui apparaît au survol */
+.pilier-ats::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 16px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
 }
 
 .pilier-ats h3 {
-    font-size: 1.5rem;
-    color: var(--text-main);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.pilier-ats p em {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
 }
 
 .pilier-ats h4 {
-    margin-top: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.6);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    opacity: 0.7;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
-/* Personnalisation de chaque pilier avec sa couleur d'accentuation */
+/* --- PERSONNALISATION & INTERACTION DES PILIERS --- */
 
-/* Productions (Rouge) */
-#productions { border-top: 4px solid var(--prod-color); }
-#productions:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.15);
+/* Au survol global d'une carte */
+.pilier-ats:hover {
+    transform: translateY(-10px) scale(1.02); /* Légère lévitation et agrandissement */
+    border-color: rgba(255, 255, 255, 0.3);
 }
-#productions p em { color: var(--prod-color); font-style: normal; font-weight: bold; }
+.pilier-ats:hover::before {
+    opacity: 1; /* Allume le halo */
+}
 
-/* Records (Violet) */
-#records { border-top: 4px solid var(--rec-color); }
-#records:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(131, 56, 236, 0.15);
+/* PRODUCTIONS (ROUGE) */
+#productions p em { color: rgb(var(--prod-neon)); text-shadow: 0 0 15px rgba(var(--prod-neon), 0.5); }
+#productions:hover::before {
+    /* Le halo rouge au survol */
+    box-shadow: inset 0 0 60px rgba(var(--prod-neon), 0.3), 0 0 30px rgba(var(--prod-neon), 0.5);
 }
-#records p em { color: var(--rec-color); font-style: normal; font-weight: bold; }
+#productions:hover { border-top: 3px solid rgb(var(--prod-neon)); }
 
-/* Editions (Vert) */
-#editions { border-top: 4px solid var(--edit-color); }
-#editions:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(42, 157, 143, 0.15);
-}
-#editions p em { color: var(--edit-color); font-style: normal; font-weight: bold; }
 
-/* Events (Magenta) */
-#events { border-top: 4px solid var(--events-color); }
-#events:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 0, 110, 0.15);
+/* RECORDS (VIOLET) */
+#records p em { color: rgb(var(--rec-neon)); text-shadow: 0 0 15px rgba(var(--rec-neon), 0.5); }
+#records:hover::before {
+    box-shadow: inset 0 0 60px rgba(var(--rec-neon), 0.3), 0 0 30px rgba(var(--rec-neon), 0.5);
 }
-#events p em { color: var(--events-color); font-style: normal; font-weight: bold; }
+#records:hover { border-top: 3px solid rgb(var(--rec-neon)); }
+
+
+/* EDITIONS (VERT) */
+#editions p em { color: rgb(var(--edit-neon)); text-shadow: 0 0 15px rgba(var(--edit-neon), 0.5); }
+#editions:hover::before {
+    box-shadow: inset 0 0 60px rgba(var(--edit-neon), 0.3), 0 0 30px rgba(var(--edit-neon), 0.5);
+}
+#editions:hover { border-top: 3px solid rgb(var(--edit-neon)); }
+
+
+/* EVENTS (MAGENTA) */
+#events p em { color: rgb(var(--events-neon)); text-shadow: 0 0 15px rgba(var(--events-neon), 0.5); }
+#events:hover::before {
+    box-shadow: inset 0 0 60px rgba(var(--events-neon), 0.3), 0 0 30px rgba(var(--events-neon), 0.5);
+}
+#events:hover { border-top: 3px solid rgb(var(--events-neon)); }
+
 
 /* ==========================================================================
-   SECTION WORKFLOW
+   WORKFLOW SECTION
    ========================================================================== */
 #workflow-synergie {
     text-align: center;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 3rem;
-    border-radius: 12px;
-    margin-top: 4rem;
-    border: 1px solid rgba(245, 208, 97, 0.2);
+    /* Fond sombre mais avec une lueur dorée subtile */
+    background: radial-gradient(circle at center, rgba(245, 208, 97, 0.05) 0%, rgba(255,255,255,0.02) 100%);
+    padding: 5rem 3rem;
+    border-radius: 24px;
+    margin-top: 6rem;
+    border: 1px solid rgba(245, 208, 97, 0.1);
+    position: relative;
+}
+
+/* Effet visuel de connecteurs */
+#workflow-synergie::after {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: 24px;
+    background: linear-gradient(45deg, var(--prod-neon), var(--gold-accent), var(--rec-neon), var(--events-neon));
+    z-index: -1;
+    opacity: 0.15;
+    filter: blur(20px);
 }
 
 #workflow-synergie h2 {
     color: var(--gold-accent);
-}
-
-#workflow-synergie p {
-    font-size: 1.1rem;
-    max-width: 900px;
-    margin: 0 auto;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 #workflow-synergie strong {
     color: var(--text-main);
+    font-weight: 700;
+    border-bottom: 1px dotted var(--gold-accent);
 }
 
 /* ==========================================================================
-   PIED DE PAGE (Footer)
+   FOOTER
    ========================================================================== */
 #pied-de-page {
     text-align: center;
-    padding: 2rem;
-    background-color: #050914;
+    padding: 4rem 2rem;
+    margin-top: 4rem;
+    background: rgba(5, 9, 20, 0.6);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-#pied-de-page p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.4);
-}
-
 /* ==========================================================================
-   RESPONSIVE DESIGN (Mobiles & Tablettes)
+   RESPONSIVE
    ========================================================================== */
 @media (max-width: 768px) {
-    #entete-global h1 {
-        font-size: 2.2rem;
-    }
-    #entete-global nav ul {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    #presentation-globale h2, #les-piliers > h2 {
-        font-size: 2rem;
-    }
-    main {
-        padding: 2rem 1rem;
-    }
-    .pilier-ats {
-        padding: 1.5rem;
-    }
+    #entete-global { padding-top: 5rem; }
+    #entete-global h1 { font-size: 2.8rem; }
+    #entete-global nav ul { flex-direction: column; gap: 1.5rem; }
+    .pilier-ats { padding: 2rem; }
 }
