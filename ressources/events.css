@@ -1,0 +1,102 @@
+/* ==========================================================================
+   PAGE SPÉCIFIQUE : ATS EVENTS
+   ========================================================================== */
+/* Fond spatial teinté de magenta électrique */
+body.page-events {
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 0, 110, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 15% 60%, rgba(245, 208, 97, 0.05) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--bg-main), var(--bg-deep));
+}
+
+/* La vague de lumière du haut : Or vers Magenta */
+body.page-events #entete-global::before {
+    background: linear-gradient(90deg, transparent 0%, var(--gold-accent) 40%, rgba(255, 0, 110, 0.9) 60%, transparent 100%);
+}
+
+/* Titre H1 : Dégradé Blanc -> Magenta -> Blanc */
+body.page-events #entete-global h1 {
+    background: linear-gradient(to right, var(--text-main) 20%, rgb(var(--events-neon)) 50%, var(--text-main) 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 8s linear infinite;
+}
+
+body.page-events .hr-events {
+    background: linear-gradient(to right, transparent, rgba(255, 0, 110, 0.5), transparent);
+}
+
+/* Cartes de la page Events */
+.events-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 3px solid rgba(255, 0, 110, 0.5); /* Liseré magenta permanent */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animation de l'icône Faisceau (Laser de Scène) */
+.icon-beam {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid rgb(var(--events-neon));
+    margin-bottom: 1.5rem;
+    position: relative;
+    filter: drop-shadow(0 0 8px rgba(var(--events-neon), 0.8));
+    animation: strobeLaser 2s infinite alternate;
+}
+
+/* L'effet de faisceau qui s'étend vers le haut */
+.icon-beam::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: -15px;
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255, 0, 110, 0.4), transparent);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: rotate(180deg);
+}
+
+@keyframes strobeLaser {
+    0%, 20% { opacity: 1; filter: drop-shadow(0 0 15px rgba(255, 0, 110, 1)); }
+    21%, 25% { opacity: 0.2; filter: drop-shadow(0 0 2px rgba(255, 0, 110, 0.2)); }
+    26%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.8)); }
+}
+
+/* Intensité maximale pour la carte Skynium Arena */
+.beam-intense {
+    animation: strobeLaser 0.5s infinite alternate;
+}
+
+.events-card h3 {
+    font-size: 1.6rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+.events-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 0, 110, 0.4);
+    box-shadow: inset 0 0 40px rgba(255, 0, 110, 0.1), 0 10px 30px rgba(255, 0, 110, 0.2);
+}
+
+/* Mise en avant spécifique pour la carte Skynium Arena */
+.focus-arena {
+    background: rgba(255, 0, 110, 0.05);
+    border-top: 3px solid rgb(var(--events-neon));
+}
+
+.focus-arena p strong {
+    color: var(--text-main);
+    text-shadow: 0 0 8px rgba(255, 0, 110, 0.6);
+}
