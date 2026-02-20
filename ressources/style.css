@@ -1,0 +1,268 @@
+/* ==========================================================================
+   VARIABLES DE COULEURS (Palette "Nuit Étoilée & Projecteurs")
+   ========================================================================== */
+:root {
+    --bg-main: #0B132B;       /* Bleu Espace Profond */
+    --text-main: #F8F9FA;     /* Blanc Nuage */
+    --gold-accent: #F5D061;   /* Or Électrique / Projecteur */
+
+    /* Couleurs d'accentuation des 4 Piliers */
+    --prod-color: #E63946;    /* Rouge Enregistrement */
+    --rec-color: #8338EC;     /* Violet Acoustique */
+    --edit-color: #2A9D8F;    /* Vert Émeraude */
+    --events-color: #FF006E;  /* Magenta Scène */
+}
+
+/* ==========================================================================
+   RÉINITIALISATION & BASE (Zéro trackeur, polices systèmes)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: #cbd5e1; /* Un gris très clair pour reposer les yeux sur fond sombre */
+}
+
+a {
+    color: var(--gold-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--text-main);
+}
+
+ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+}
+
+/* ==========================================================================
+   EN-TÊTE GLOBAL (Header)
+   ========================================================================== */
+#entete-global {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, #050914 0%, var(--bg-main) 100%);
+    border-bottom: 1px solid rgba(245, 208, 97, 0.1);
+}
+
+#entete-global h1 {
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+#entete-global p strong {
+    font-size: 1.2rem;
+    color: var(--gold-accent);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+#entete-global nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    margin-left: 0;
+}
+
+#entete-global nav a {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+}
+
+#entete-global nav a:hover {
+    border-bottom-color: var(--gold-accent);
+}
+
+/* ==========================================================================
+   CORPS DE PAGE (Main)
+   ========================================================================== */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+#presentation-globale {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#presentation-globale h2 {
+    color: var(--gold-accent);
+    font-size: 2.5rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 4rem 0;
+}
+
+/* ==========================================================================
+   GRILLE DES 4 PILIERS
+   ========================================================================== */
+#les-piliers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+#les-piliers > h2 {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--gold-accent);
+    margin-bottom: 2rem;
+}
+
+.pilier-ats {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pilier-ats h3 {
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.pilier-ats h4 {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+/* Personnalisation de chaque pilier avec sa couleur d'accentuation */
+
+/* Productions (Rouge) */
+#productions { border-top: 4px solid var(--prod-color); }
+#productions:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.15);
+}
+#productions p em { color: var(--prod-color); font-style: normal; font-weight: bold; }
+
+/* Records (Violet) */
+#records { border-top: 4px solid var(--rec-color); }
+#records:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(131, 56, 236, 0.15);
+}
+#records p em { color: var(--rec-color); font-style: normal; font-weight: bold; }
+
+/* Editions (Vert) */
+#editions { border-top: 4px solid var(--edit-color); }
+#editions:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(42, 157, 143, 0.15);
+}
+#editions p em { color: var(--edit-color); font-style: normal; font-weight: bold; }
+
+/* Events (Magenta) */
+#events { border-top: 4px solid var(--events-color); }
+#events:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 0, 110, 0.15);
+}
+#events p em { color: var(--events-color); font-style: normal; font-weight: bold; }
+
+/* ==========================================================================
+   SECTION WORKFLOW
+   ========================================================================== */
+#workflow-synergie {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 3rem;
+    border-radius: 12px;
+    margin-top: 4rem;
+    border: 1px solid rgba(245, 208, 97, 0.2);
+}
+
+#workflow-synergie h2 {
+    color: var(--gold-accent);
+}
+
+#workflow-synergie p {
+    font-size: 1.1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#workflow-synergie strong {
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   PIED DE PAGE (Footer)
+   ========================================================================== */
+#pied-de-page {
+    text-align: center;
+    padding: 2rem;
+    background-color: #050914;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#pied-de-page p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Mobiles & Tablettes)
+   ========================================================================== */
+@media (max-width: 768px) {
+    #entete-global h1 {
+        font-size: 2.2rem;
+    }
+    #entete-global nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    #presentation-globale h2, #les-piliers > h2 {
+        font-size: 2rem;
+    }
+    main {
+        padding: 2rem 1rem;
+    }
+    .pilier-ats {
+        padding: 1.5rem;
+    }
+}
