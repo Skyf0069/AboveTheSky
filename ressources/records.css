@@ -1,0 +1,95 @@
+/* ==========================================================================
+   PAGE SPÉCIFIQUE : ATS RECORDS
+   ========================================================================== */
+/* Fond spatial teinté de violet acoustique */
+body.page-records {
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(131, 56, 236, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 15% 70%, rgba(245, 208, 97, 0.05) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--bg-main), var(--bg-deep));
+}
+
+/* La vague de lumière du haut : Or vers Violet */
+body.page-records #entete-global::before {
+    background: linear-gradient(90deg, transparent 0%, var(--gold-accent) 40%, rgba(131, 56, 236, 0.9) 60%, transparent 100%);
+}
+
+/* Titre H1 : Dégradé Blanc -> Violet -> Blanc */
+body.page-records #entete-global h1 {
+    background: linear-gradient(to right, var(--text-main) 20%, rgb(var(--rec-neon)) 50%, var(--text-main) 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 8s linear infinite;
+}
+
+body.page-records .hr-rec {
+    background: linear-gradient(to right, transparent, rgba(131, 56, 236, 0.5), transparent);
+}
+
+/* Cartes de la page Records */
+.rec-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 3px solid rgba(131, 56, 236, 0.5); /* Liseré violet permanent */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animation de l'icône Onde Sonore (Pulsation acoustique) */
+.icon-wave {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: 2px solid rgb(var(--rec-neon));
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    position: relative;
+    box-shadow: 0 0 10px rgba(var(--rec-neon), 0.5);
+}
+
+.icon-wave::after {
+    content: '';
+    position: absolute;
+    top: -6px; left: -6px; right: -6px; bottom: -6px;
+    border: 2px solid rgb(var(--rec-neon));
+    border-radius: 50%;
+    animation: pulsationSonore 2s ease-out infinite;
+}
+
+@keyframes pulsationSonore {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* Intensifier l'onde pour l'ATS Mix */
+.wave-intense::after {
+    animation: pulsationSonore 1.2s ease-out infinite; /* Plus rapide, plus intense */
+}
+
+.rec-card h3 {
+    font-size: 1.6rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+.rec-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(131, 56, 236, 0.4);
+    box-shadow: inset 0 0 40px rgba(131, 56, 236, 0.1), 0 10px 30px rgba(131, 56, 236, 0.2);
+}
+
+/* Mise en avant spécifique pour la carte ATS Mix */
+.focus-atsmix {
+    background: rgba(131, 56, 236, 0.05);
+    border-top: 3px solid rgb(var(--rec-neon));
+}
+.focus-atsmix p strong {
+    color: var(--text-main);
+    text-shadow: 0 0 8px rgba(131, 56, 236, 0.6);
+}
