@@ -1,0 +1,85 @@
+/* ==========================================================================
+   PAGE SPÉCIFIQUE : ATS PRODUCTIONS
+   ========================================================================== */
+/* On teinte subtilement le fond spatial de la page Productions en rouge foncé */
+body.page-productions {
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(230, 57, 70, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 85% 30%, rgba(245, 208, 97, 0.05) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--bg-main), var(--bg-deep));
+}
+
+/* La vague de lumière du haut passe en Or et Rouge */
+body.page-productions #entete-global::before {
+    background: linear-gradient(90deg, transparent 0%, var(--gold-accent) 40%, rgba(230, 57, 70, 0.9) 60%, transparent 100%);
+}
+
+/* Titre H1 : Dégradé Or vers Rouge */
+body.page-productions #entete-global h1 {
+    background: linear-gradient(to right, var(--text-main) 20%, rgb(var(--prod-neon)) 50%, var(--text-main) 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 8s linear infinite;
+}
+
+body.page-productions .hr-prod {
+    background: linear-gradient(to right, transparent, rgba(230, 57, 70, 0.5), transparent);
+}
+
+/* Grille des services (adaptée des piliers) */
+.grille-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    perspective: 1000px;
+}
+
+/* Cartes de la page Productions */
+.prod-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 3px solid rgba(230, 57, 70, 0.5); /* Liseré rouge permanent */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Le petit point d'enregistrement rouge animé (Point REC) */
+.icon-rec {
+    width: 12px;
+    height: 12px;
+    background-color: rgb(var(--prod-neon));
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 10px rgba(var(--prod-neon), 0.8);
+    animation: clignotementRec 2s infinite;
+}
+
+@keyframes clignotementRec {
+    0% { opacity: 1; box-shadow: 0 0 15px rgba(230, 57, 70, 0.9); }
+    50% { opacity: 0.3; box-shadow: 0 0 5px rgba(230, 57, 70, 0.3); }
+    100% { opacity: 1; box-shadow: 0 0 15px rgba(230, 57, 70, 0.9); }
+}
+
+.prod-card h3 {
+    font-size: 1.6rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+.prod-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(230, 57, 70, 0.4);
+    box-shadow: inset 0 0 40px rgba(230, 57, 70, 0.1), 0 10px 30px rgba(230, 57, 70, 0.2);
+}
+
+/* Mise en avant spécifique pour la carte Multicaméra */
+.focus-multicam {
+    background: rgba(230, 57, 70, 0.05);
+    border-top: 3px solid rgb(var(--prod-neon));
+}
